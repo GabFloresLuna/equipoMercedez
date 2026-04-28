@@ -34,6 +34,6 @@ public class Repuesto
     private Integer stock;
 
     @ManyToOne
-    @JoinColumn(name = "repuesto_id")
+    @JoinColumn(name = "marca_id")
     private Marca marca;
 }

@@ -1,11 +1,12 @@
 package cl.duoc.repuestosEquipoMercedez.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn; 
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,6 @@ public class Marca
     @Column(nullable = false, unique = true, name = "nombre_marca", length = 50)
     private String nombre;
 
-    @OneToMany
-    @JoinColumn(name = "marca_id")
-    private Repuesto repuesto;
+    @OneToMany(mappedBy = "marca")
+    private List<Repuesto> repuesto;
 }
