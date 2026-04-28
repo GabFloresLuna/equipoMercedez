@@ -30,4 +30,6 @@ public class Repuesto
     @ManyToOne
     @JoinColumn(name = "repuesto_id")
     private Marca marca;
+
+    
 }
