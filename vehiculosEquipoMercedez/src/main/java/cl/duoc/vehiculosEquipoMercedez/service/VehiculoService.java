@@ -1,11 +1,10 @@
 package cl.duoc.vehiculosEquipoMercedez.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import cl.duoc.vehiculosEquipoMercedez.exception.VehiculoNotFoundException;
-import cl.duoc.vehiculosEquipoMercedez.exception.PlacaDuplicadaException;
 import cl.duoc.vehiculosEquipoMercedez.model.Vehiculo;
 import cl.duoc.vehiculosEquipoMercedez.repository.VehiculoRepository;
 
@@ -19,10 +18,6 @@ public class VehiculoService {
 
     //Agregar nuevos vehiculos
     public Vehiculo agregarVehiculo(Vehiculo vehiculo) {
-        // Verificar si la placa ya existe
-        if (vehiculoRepository.existsByPlaca(vehiculo.getPlaca())) {
-            throw new PlacaDuplicadaException("Ya existe un vehículo con la placa: " + vehiculo.getPlaca());
-        }
         return vehiculoRepository.save(vehiculo);
     }
 
@@ -32,16 +27,21 @@ public class VehiculoService {
     }
 
     //Buscar vehiculo por ID
-    public Vehiculo obtenerVehiculoPorId(Long id) {
-        return vehiculoRepository.findById(id)
-                .orElseThrow(() -> new VehiculoNotFoundException("No se encontró el vehículo con ID: " + id));
+    public Optional<Vehiculo> obtenerVehiculoPorId(Long id) {
+        return vehiculoRepository.findById(id);
+    }
+
+    //Verificar si existe por placa
+    public boolean existePorPlaca(String placa) {
+        return vehiculoRepository.existsByPlaca(placa);
     }
 
     //Vender un vehiculo
-    public void venderVehiculo(Long id) {
+    public boolean venderVehiculo(Long id) {
         if (!vehiculoRepository.existsById(id)) {
-            throw new VehiculoNotFoundException("No se puede vender. No se encontró el vehículo con ID: " + id);
+            return false;
         }
         vehiculoRepository.deleteById(id);
+        return true;
     }
 }
