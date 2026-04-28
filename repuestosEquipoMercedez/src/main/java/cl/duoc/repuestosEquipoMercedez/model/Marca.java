@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "repuestos")
+@Table(name = "marcas")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +24,10 @@ public class Marca
     @Column(name = "marca_id")
     private Long id;
 
-    @Column(nullable = false, unique = true, name = "nombre_marca")
+    @Column(nullable = false, unique = true, name = "codigo_marca", length = 10)
+    private String code;
+
+    @Column(nullable = false, unique = true, name = "nombre_marca", length = 50)
     private String nombre;
 
     @OneToMany
