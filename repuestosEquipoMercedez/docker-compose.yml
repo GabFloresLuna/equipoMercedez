@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_repuestos
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=serolf
+      - MYSQL_DATABASE=repuesto_db
+      - MYSQL_USER=flores
+      - MYSQL_PASSWORD=serolf
+    ports:
+      - "3310:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
