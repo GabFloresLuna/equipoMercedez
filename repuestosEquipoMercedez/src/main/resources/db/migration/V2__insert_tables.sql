@@ -1,5 +1,6 @@
 INSERT INTO marcas (codigo_marca, nombre_marca) VALUES ('MB-001', 'Mercedes-Benz');
-INSERT INTO marcas (codigo_marca, nombre_marca) VALUES ('AM-002', 'AMG');
+INSERT INTO marcas (codigo_marca, nombre_marca) VALUES ('AD-002', 'AUDI');
+INSERT INTO marcas (codigo_marca, nombre_marca) VALUES ('AD-003', 'BMW');
 
 INSERT INTO repuestos (codigo_repuesto, nombre_repuesto, stock, marca_id) 
-VALUES ('FL-101', 'Filtro de Aire', 50, 1);
+VALUES ('FL-101', 'Filtro de Aire', 50, 1); 
