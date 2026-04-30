@@ -19,27 +19,19 @@ public class RepuestoService
     private final RepuestoRepository repuestoRepository;
     private final MarcaRepository marcaRepository;
 
+    private Repuesto findByCode(String code)
+    {
+        return repuestoRepository.findByCode(code)
+            .orElseThrow(()-> new RuntimeException("No existe repuesto con dicho código/*El formato del codigo debe ser XX-000 (Ej., NY-101)"));
+    }
+
     @Transactional
     public Repuesto save(RepuestoDTO dto)
     {
-        // Excepción por si ya existe el código/nombre
-        if (repuestoRepository.existsByCode(dto.getCodigoRepuesto()))
-        {
-            throw new RuntimeException("El código del repuesto ya existe");
-        }
-        if (repuestoRepository.existsByNombre(dto.getNombre()))
-        {
-            throw new RuntimeException("El nombre del repuesto ya existe");
-        }
 
         // Busca o crea la marca
         Marca marca = marcaRepository.findByCode(dto.getCodigoMarca())
-            .orElseGet(()-> {
-                                Marca nuevMarca = new Marca();
-                                nuevMarca.setCode(dto.getCodigoMarca());
-                                nuevMarca.setNombre(dto.getMarca());
-                                return marcaRepository.save(nuevMarca);
-                            } );
+            .orElseThrow (()-> new RuntimeException("No existe marca con dicho código"));
         
         //Guardar repuesto
         Repuesto repuesto = new Repuesto();
@@ -54,5 +46,18 @@ public class RepuestoService
     public List<Repuesto> listRepuestos()
     {
         return repuestoRepository.findAll();
+    }
+
+    @Transactional
+    public String modificarStock(String code, Integer n)
+    {
+        Repuesto repuesto = findByCode(code);
+        Integer stockActual = repuesto.getStock();
+        if (stockActual + n < 0)
+        {
+            throw new RuntimeException("Stock insuficiente");
+        }
+        repuesto.setStock(stockActual+n);
+        return "El stock ha sido modificado en %d".formatted(n);
     }
 }

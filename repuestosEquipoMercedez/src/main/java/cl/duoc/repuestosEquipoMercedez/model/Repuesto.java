@@ -27,7 +27,7 @@ public class Repuesto
     @Column(nullable = false, unique = true, name = "codigo_repuesto", length = 10)
     private String code;
 
-    @Column(nullable = false, unique = true, name = "nombre_repuesto", length = 50)
+    @Column(nullable = false, name = "nombre_repuesto", length = 50)
     private String nombre;
 
     @Column(nullable = false, length = 3)
