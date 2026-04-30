@@ -1,4 +1,4 @@
-package cl.duoc.repuestosEquipoMercedez.exception;
+package cl.duoc.vehiculosEquipoMercedez.exception;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -10,15 +10,15 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import cl.duoc.repuestosEquipoMercedez.dto.ApiResponse;
+import cl.duoc.vehiculosEquipoMercedez.dto.ApiResponse;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler 
 {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse<Map<String, String>>> handleValidationErrors(MethodArgumentNotValidException ex)
+    public ResponseEntity<ApiResponse<Map<String, String>>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex)
     {
-        Map<String, String> errors = new HashMap<>();
+        Map<String,String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach((error)->
         {
             String fieldname = error.getField();
@@ -29,16 +29,16 @@ public class GlobalExceptionHandler
         ApiResponse<Map<String,String>>response = new ApiResponse<>
         (
             false,
-            "Error de validación en los argumentos del repuesto",
+            "Error de validación en los arugmentos del vehiculo",
             errors,
             LocalDateTime.now().toString()
         );
 
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ApiResponse<String>> handleRuntime(RuntimeException ex)
+    public ResponseEntity<ApiResponse<String>> handleRuntimeException(RuntimeException ex)
     {
         ApiResponse<String> response = new ApiResponse<>
         (
@@ -49,6 +49,5 @@ public class GlobalExceptionHandler
         );
 
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-
     }
 }

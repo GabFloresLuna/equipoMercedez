@@ -50,15 +50,14 @@ public class RepuestoController
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<RepuestoDTO>>> listRepuesto()
+    public ResponseEntity<ApiResponse<List<RepuestoDTO>>> listRepuestos()
     {
         //obtiene la lista de repuesto
         List<Repuesto> listaRepuesto = repuestoService.listRepuestos();
 
         //genera la lista de repuestoDTO
         List<RepuestoDTO> dtos = listaRepuesto.stream()
-                                    .map(this::mapToDTO)
-                                    .collect(Collectors.toList());
+            .map(this::mapToDTO).collect(Collectors.toList());
 
         //Genera la respuesta
         ApiResponse<List<RepuestoDTO>> response = new ApiResponse<>
@@ -83,7 +82,8 @@ public class RepuestoController
         RepuestoDTO data = mapToDTO(nuevRepuesto);
 
         //Construye respuesta
-        ApiResponse<RepuestoDTO> response = new ApiResponse<>(
+        ApiResponse<RepuestoDTO> response = new ApiResponse<>
+        (
             true,
             "Repuesto creado exitosamente",
             data,
@@ -98,7 +98,8 @@ public class RepuestoController
     {
         String data = repuestoService.modificarStock(code, n);
 
-        ApiResponse<String> response = new ApiResponse<>(
+        ApiResponse<String> response = new ApiResponse<>
+        (
             true,
             "Repuesto modificado correctamente",
             data,

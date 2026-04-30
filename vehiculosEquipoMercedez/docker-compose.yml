@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_vehiculo
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: serolf
+      MYSQL_DATABASE: vehiculo_db
+      MYSQL_USER: flores
+      MYSQL_PASSWORD: serolf
+    ports:
+      - "3311:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql

@@ -7,15 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import cl.duoc.repuestosEquipoMercedez.model.Repuesto;
  
-
 @Repository
 public interface RepuestoRepository extends JpaRepository<Repuesto, Long> 
-{
-    Optional<Repuesto> findByNombre(String nombre);
-
+{ 
     Optional<Repuesto> findByCode(String code);
-
-    boolean existsByCode(String code);
-
-    boolean existsByNombre(String nombre);
 }

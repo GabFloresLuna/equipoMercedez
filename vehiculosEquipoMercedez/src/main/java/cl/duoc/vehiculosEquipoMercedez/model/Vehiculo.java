@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "vichulos")
+@Table(name = "vehiculos")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,15 +21,16 @@ public class Vehiculo
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="vehiculo_id")
     private Long id;
 
     @Column(name = "nombre_vehiculo", length = 50, nullable = false)
     private String nombre;
 
-    @Column(name = "cod_vehiculo",length = 10, nullable = false, unique = true)
+    @Column(name = "codigo_vehiculo",length = 10, nullable = false, unique = true)
     private String code;
 
-    @Column(name = "stock_vehiculo", length = 3, nullable = false)
+    @Column(name = "stock", length = 3, nullable = false)
     private Integer stock;
 
     @ManyToOne()

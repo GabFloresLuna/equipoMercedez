@@ -29,7 +29,7 @@ public class RepuestoService
     public Repuesto save(RepuestoDTO dto)
     {
 
-        // Busca o crea la marca
+        // Busca la marca
         Marca marca = marcaRepository.findByCode(dto.getCodigoMarca())
             .orElseThrow (()-> new RuntimeException("No existe marca con dicho código"));
         
