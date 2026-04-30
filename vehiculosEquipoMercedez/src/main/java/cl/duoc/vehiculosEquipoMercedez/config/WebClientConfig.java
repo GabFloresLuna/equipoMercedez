@@ -11,7 +11,7 @@ public class WebClientConfig
     public WebClient webClient()
     {
         return WebClient.builder()
-            .baseUrl("http://localhost:9000/api/v1/repuestos")
+            .baseUrl("http://localhost:9000")
             .build();
     }
 }

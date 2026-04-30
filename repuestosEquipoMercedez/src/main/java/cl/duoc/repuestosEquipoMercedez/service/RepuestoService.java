@@ -25,6 +25,12 @@ public class RepuestoService
             .orElseThrow(()-> new RuntimeException("No existe repuesto con dicho código/*El formato del codigo debe ser XX-000 (Ej., NY-101)"));
     }
 
+    private List<Repuesto> findByMarca(String codeMarca)
+    {
+        return repuestoRepository.findByMarca(codeMarca)
+            .orElseThrow(()-> new RuntimeException("No existen repuestos con dicho código/*El formato del codigo debe ser XX-000 (Ej., NY-101)"));
+    }
+
     @Transactional
     public Repuesto save(RepuestoDTO dto)
     {
@@ -59,5 +65,12 @@ public class RepuestoService
         }
         repuesto.setStock(stockActual+n);
         return "El stock ha sido modificado en %d".formatted(n);
+    }
+
+    @Transactional
+    public List<Repuesto> listByMarca(String codeMarca)
+    {
+        return findByMarca(codeMarca);
+
     }
 }

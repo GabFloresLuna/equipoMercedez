@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class RepuestoService 
+public class RepuestoClient 
 {
     private final WebClient webClient;
-
-    public 
 }

@@ -8,6 +8,7 @@ import cl.duoc.repuestosEquipoMercedez.dto.ApiResponse;
 import cl.duoc.repuestosEquipoMercedez.dto.RepuestoDTO;
 import cl.duoc.repuestosEquipoMercedez.model.Repuesto;
 import cl.duoc.repuestosEquipoMercedez.service.RepuestoService;
+import io.micrometer.core.ipc.http.HttpSender.Response;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -94,7 +95,7 @@ public class RepuestoController
     }
 
     @PutMapping(path = "/{code}", params = "n")
-    public ResponseEntity<ApiResponse<String>> modificarStock(@PathVariable String code, @RequestParam Integer n)
+    public ResponseEntity<ApiResponse<String>> modifyStock(@PathVariable String code, @RequestParam Integer n)
     {
         String data = repuestoService.modificarStock(code, n);
 
@@ -109,4 +110,6 @@ public class RepuestoController
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
+    @PutMapping(path='/marca')
+    public Response<ApiResponse<List<RepuestoDTO>>> listByMarca(@RequestPath )
 }
